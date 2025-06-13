@@ -1,0 +1,7 @@
+body { font-family: sans-serif; padding: 1em; margin: 0; }
+.ctrl { display: flex; flex-wrap: wrap; gap: 0.5em; margin-bottom: 1em; }
+input, select, button { flex: 1; padding: 0.5em; font-size: 1em; }
+ul { list-style: none; padding: 0; }
+li { display: flex; align-items: center; margin-bottom: 1em; }
+li img { width: 60px; height: 60px; object-fit: cover; margin-right: 0.5em; }
+li span { flex: 1; }

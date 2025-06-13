@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Vine Suche</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="stylesheet" href="/static/style.css"/>
+</head>
+<body>
+  <h2>Amazon Vine Suche</h2>
+  <div class="ctrl">
+    <input id="query" placeholder="Suchbegriff"/>
+    <select id="category">
+      <option value="">Alle Kategorien</option>
+      {% for cat in categories %}
+        <option value="{{cat}}">{{cat.capitalize()}}</option>
+      {% endfor %}
+    </select>
+    <button onclick="search()">Suchen</button>
+  </div>
+  <ul id="results"></ul>
+
+  <script>
+    async function search() {
+      const q = document.getElementById("query").value;
+      const c = document.getElementById("category").value;
+      const res = await fetch(`/search?query=${encodeURIComponent(q)}&category=${c}`);
+      const items = await res.json();
+      const list = document.getElementById("results");
+      list.innerHTML = "";
+      items.forEach(item => {
+        const li = document.createElement("li");
+        li.innerHTML = `
+          <a href="${item.link}" target="_blank">
+            <img src="${item.img}" alt="${item.title}"/>
+            <span>${item.title}</span>
+          </a>`;
+        list.appendChild(li);
+      });
+    }
+  </script>
+</body>
+</html>
